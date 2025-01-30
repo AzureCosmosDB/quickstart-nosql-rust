@@ -8,6 +8,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "ms-azuretools.vscode-cosmosdb",
         "rust-lang.rust-analyzer"
       ]
     }
