@@ -1,1 +1,0 @@
-    let client = CosmosClient::new("<azure-cosmos-db-nosql-connection-string>".to_string())?;
