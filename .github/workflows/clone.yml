@@ -58,8 +58,8 @@ jobs:
           content=$(cat .github/workflows/replace.toml)
           awk -v content="$content" '
           BEGIN { in_block = 0 }
-          /^\s*\/\/ azure_data_cosmos = "0.22.0"/ { in_block = 1; print content; next }
-          /^\s*\/\/ azure_identity = "0.22.0"/ { in_block = 0; next }
+          /^\s*azure_data_cosmos = "0.22.0"/ { in_block = 1; print content; next }
+          /^\s*azure_identity = "0.22.0"/ { in_block = 0; next }
           !in_block { print }
           ' Cargo.toml > Cargo.tmp.toml && mv Cargo.tmp.toml Cargo.toml
       - name: Change text content (namespaces)
@@ -68,8 +68,7 @@ jobs:
           content=$(cat .github/workflows/replace.01.rs)
           awk -v content="$content" '
           BEGIN { in_block = 0 }
-          /^\s*\/\/ use azure_identity::DefaultAzureCredential;/ { in_block = 1; print content; next }
-          /^\s*\/\/ use futures::stream::StreamExt;/ { in_block = 0; next }
+          /^\s*use azure_identity::DefaultAzureCredential;/ { in_block = 1; print content; next }
           !in_block { print }
           ' app/cosmos.rs > app/cosmos.tmp.rs && mv app/cosmos.tmp.rs app/cosmos.rs
       - name: Change text content (client)
