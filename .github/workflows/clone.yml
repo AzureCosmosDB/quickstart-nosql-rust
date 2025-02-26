@@ -67,10 +67,8 @@ jobs:
         run: |
           content=$(cat .github/workflows/replace.01.rs)
           awk -v content="$content" '
-          BEGIN { in_block = 0 }
-          /^\s*use azure_identity::DefaultAzureCredential;/ { in_block = 1; print content; next }
-          /^\s*/ { in_block = 0; next }
-          !in_block { print }
+          /^\s*use azure_identity::DefaultAzureCredential;/ { print content; next }
+          { print }
           ' app/cosmos.rs > app/cosmos.tmp.rs && mv app/cosmos.tmp.rs app/cosmos.rs
       - name: Change text content (client)
         working-directory: target
